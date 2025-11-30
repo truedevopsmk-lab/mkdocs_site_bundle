@@ -1,0 +1,13 @@
+site_name: ArgoCD Cheatsheet
+site_description: Quick ArgoCD notes and cheats
+site_author: Muthu
+theme:
+  name: material
+nav:
+  - Home: index.md
+markdown_extensions:
+  - toc:
+      permalink: true
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.snippets
