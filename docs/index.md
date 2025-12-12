@@ -1,296 +1,180 @@
-A clean, practical, reusable **ArgoCD Troubleshooting Cheat Sheet** that you can save, share, or drop into any repo/wiki.
-Designed specifically for **real-world GitOps debugging**, including Crossplane, Helm, Kustomize, and SyncWave issues.
+## 📘 Navigation Menu
+[🏠 Home](https://truedevopsmk-lab.github.io/Christmas-Trip-2025/) • [3 Day Budapest Itinerary (Dec 21–23)](https://truedevopsmk-lab.github.io/Christmas-Trip-2025/3-Day%20Budapest%20Itinerary%20%28Dec%2021%E2%80%9323%29/) • [Attractions, Cafés & Local Specialties](https://truedevopsmk-lab.github.io/Christmas-Trip-2025/Attractions%2C%20Caf%C3%A9s%20%26%20Local%20Specialties/) • [Budapest Coffee + Pastry Crawl](https://truedevopsmk-lab.github.io/Christmas-Trip-2025/Budapest%20Coffee%20%2B%20Pastry%20Crawl/) • [Budapest Time of the Day Itinerary](https://truedevopsmk-lab.github.io/Christmas-Trip-2025/Budapest-Time-of-the-Day-Itinerary/) • [Overview   Itinerary](https://truedevopsmk-lab.github.io/Christmas-Trip-2025/Overview%20-%20Itinerary/) • [Test Folder Delete this](https://truedevopsmk-lab.github.io/Christmas-Trip-2025/Test-Folder-Delete-this/) • [Trip Packing Checklist](https://truedevopsmk-lab.github.io/Christmas-Trip-2025/Trip%20Packing%20Checklist/) • [you can delete this](https://truedevopsmk-lab.github.io/Christmas-Trip-2025/you%20can%20delete%20this/) •
+
+---
+<!-- inject-nav -->
+
+## 📘 Navigation Menu
+
+---
+A beautifully curated 10-day winter Eurotrip covering **Budapest → Bratislava (+Vienna) → Prague → Wrocław** from **21 Dec 2025 to 31 Dec 2025**.
+
+This site tracks all trip details — flights, days, routes, markets, checklists, and logistics.
 
 ---
 
-# 🚀 **ArgoCD Troubleshooting Cheat Sheet (Reusable, Production-Ready)**
+## 🧭  **Trip Overview**
 
-## 🟢 **1. Check App Status**
+**Dates:** 21 Dec 2025 → 01 Jan 2026  
+**PNR:** `8XTHPC`  
+**Passengers:**  
+- **Muthukumar Sambandam** — Ticket 2202236467432-33  
+- **Shivani Kakhandki** — Ticket 2202236467434-35  
 
-See sync + health + revision + errors.
-
-```
-argocd app get <app-name>
-```
-
-You’re looking for:
-
-* **Sync Status:** Synced
-* **Health:** Healthy
-* **OperationState:** Succeeded
-
-If not → scroll to the events/errors.
+**Route:**  
+**Budapest → Bratislava → Vienna (day-trip) → Bratislava → Prague → Wrocław → Bangalore**
 
 ---
 
-## 🟣 **2. List All Managed Resources**
+## ✈️ **Flight Plan**
 
-Identify which resource is failing or OutOfSync.
+### **Outbound — BLR → BUD (21 Dec 2025)**  
 
-```
-argocd app resources <app-name>
-```
+| Segment | Flight | Aircraft | Time | Notes |
+|--------|--------|----------|------|-------|
+| BLR → MUC | LH765 | A350-900 | 02:50 → 08:10 | Layover 3h10m |
+| MUC → BUD | LH1676 | A320 | 11:20 → 12:35 | Arrive Budapest |
 
-Filter by unhealthy:
 
-```
-argocd app resources <app-name> --health Unhealthy
-```
+### **Return — WRO → BLR (31 Dec 2025 → 01 Jan 2026)**  
+| Segment | Flight | Aircraft | Time | Notes |
+|--------|--------|----------|------|-------|
+| WRO → MUC | LH1635 | CRJ900 | 06:00 → 07:10 | Layover 5h05m |
+| MUC → BLR | LH764 | A350-900 | 12:15 → 01:05 (+1) | Arrive BLR 01:05 |
 
----
 
-## 🔵 **3. Check Differences (Drift)**
+**Baggage:** 1×23kg checked · 1×8kg carry-on · 1 personal item
 
-Compare live state vs Git:
-
-```
-argocd app diff <app-name>
-```
-
-Useful for detecting:
-
-* local edits made via kubectl
-* prune mismatch
-* overwritten fields
-* manual deletes
 
 ---
 
-## 🟡 **4. Force Sync / Retry**
+## 🗓️ **Final Itinerary (City-by-City)**
 
-When ArgoCD refuses to sync due to drift or invalid state:
+### **21 Dec — Arrive Budapest 🇭🇺**
+- Land 12:35 → check-in → Basilica Market → Vörösmarty Market  
+- Evening thermal bath (Gellért / Rudas)
 
-```
-argocd app sync <app-name> --force
-```
-
-Adds extra useful flags:
-
-```
-argocd app sync <app-name> --force --prune --retry-limit 5
-```
+### **22 Dec — Budapest**
+- Castle Hill, Fisherman's Bastion, Matthias Church  
+- Chain Bridge → Great Market Hall  
+- Evening markets + optional ruin bar
 
 ---
 
-## 🔴 **5. Refresh Cache**
-
-Similar to UI “HARD REFRESH”. Forces ArgoCD to re-fetch manifests & cluster state.
-
-```
-argocd app refresh <app-name>
-```
-
-Hard refresh:
-
-```
-argocd app refresh <app-name> --hard
-```
+### **23 Dec — Budapest (Buffer Day)**
+- Light sightseeing / museums / shopping  
+- Prepare for next-day travel
 
 ---
 
-## 🔥 **6. Wait Until the App is Healthy**
-
-Automates waiting for nodes, CRDs, pods, or dependencies.
-
-```
-argocd app wait <app-name>
-```
-
-Wait for both sync + health:
-
-```
-argocd app wait <app-name> --sync --health
-```
+### **24 Dec — Budapest → Bratislava → Vienna Day Trip 🇸🇰🇦🇹**
+- Morning train **Budapest → Bratislava (2.5–3 hrs)**  
+- Drop bags, then **Bratislava → Vienna (≈1 hr)**  
+- Explore Vienna Christmas markets (Rathausplatz, Stephansplatz)  
+- **Return late evening to Bratislava**
 
 ---
 
-## ⚙️ **7. Check Detailed Sync Operation**
-
-Shows the exact operation log (failed resource, diff, retry reason).
-
-```
-argocd app get <app-name> --show-operations
-```
-
-Same but more verbose:
-
-```
-argocd app get <app-name> --show-operation-events
-```
+### **25 Dec — Christmas in Bratislava**
+- Slow Old Town walk, cafes, riverfront  
+- Limited openings → relaxed Christmas vibes
 
 ---
 
-## 📌 **8. View Sync History**
-
-Great for tracking failures, retries, and version changes.
-
-```
-argocd app history <app-name>
-```
-
-Rollback to a previous revision:
-
-```
-argocd app rollback <app-name> <ID>
-```
+### **26 Dec — Bratislava (Full Day)**
+- Explore Bratislava properly (Devin Castle if open)  
+- Prep trains for next morning
 
 ---
 
-## 🧩 **9. Get Controller Logs (when UI hides real errors)**
-
-Application controller:
-
-```
-kubectl logs -n argocd deploy/argocd-application-controller
-```
-
-Repo server (Git fetch/manifest generation issues):
-
-```
-kubectl logs -n argocd deploy/argocd-repo-server
-```
-
-Server (API/UI issues):
-
-```
-kubectl logs -n argocd deploy/argocd-server
-```
+### **27 Dec — Bratislava → Prague 🇨🇿**
+- Morning train (~3.5–4 hrs)  
+- Afternoon: Charles Bridge, Old Town Square, Christmas markets  
+- Night stay in Prague
 
 ---
 
-## 🧨 **10. Common Real-World Failures & Fixes**
-
-### ❌ *"one or more synchronization tasks are not valid"*
-
-**Fix:**
-
-* Add `SkipDryRunOnMissingResource=true`
-* Add sync-waves
-* Ensure CRDs exist before dependent resources
-
-### ❌ OutOfSync but no diff
-
-**Fix:** Hard refresh
-
-```
-argocd app refresh <app-name> --hard
-```
-
-### ❌ Crossplane resources fail during dry-run
-
-**Fix:**
-Add:
-
-```
-argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-```
-
-### ❌ Kustomize "invalid prune"
-
-**Fix:** Use structured fields in `kustomization.yaml`
-or add:
-
-```
-- PruneLast=true
-```
-
-### ❌ Helm hooks not running
-
-**Fix:**
-Ensure:
-
-```
-helm.sh/hook-weight: "-1"
-```
+### **28 Dec — Prague → Wrocław 🇵🇱**
+- Morning free in Prague  
+- Train to Wrocław (~4–5 hrs)  
+- Evening wander around Rynek (Old Town Square)
 
 ---
 
-## 🧭 **11. Debug Sync-Wave Ordering (Advanced)**
-
-Check resources sorted by sync-wave:
-
-```
-argocd app resources <app-name> --group-by syncwave
-```
+### **29–30 Dec — Wrocław (3 nights total)**
+- Market Square, Cathedral Island, Racławice Panorama  
+- Optional Kraków day trip on the 30th  
+- Cozy cafes & winter markets
 
 ---
 
-## 🧹 **12. Clean Up Failed / Stuck Resources**
-
-Sometimes ArgoCD gets stuck due to finalizers or old CRDs.
-
-Delete a stuck resource:
-
-```
-kubectl delete <kind> <name> --force --grace-period=0
-```
-
-Delete old provider CRDs (Crossplane):
-
-```
-kubectl delete provider.pkg.crossplane.io <provider-name>
-```
+### **31 Dec — Depart Wrocław → BLR**
+- Early flight 06:00 → MUC → BLR  
+- Arrive **01 Jan 2026, 01:05**
 
 ---
 
-## 🛡 **13. Healthy GitOps Best Practices**
+## 🎄 **Christmas Market Notes**
 
-Use these always:
+- **Budapest:** Basilica & Vörösmarty markets alive during your stay  
+- **Vienna:** Markets run until ~Dec 26  
+- **Bratislava:** Active through late Dec  
+- **Prague:** Runs till early January  
+- **Wrocław:** Runs **21 Nov → 7 Jan**
 
-**In Application.yaml**
-
-```
-syncPolicy:
-  automated:
-    prune: true
-    selfHeal: true
-  syncOptions:
-    - CreateNamespace=true
-    - PruneLast=true
-    - ApplyOutOfSyncOnly=true
-    - SkipDryRunOnMissingResource=true
-```
-
-**In manifests**
-
-```
-argocd.argoproj.io/sync-wave: "<number>"
-```
+**Note:** 24–26 Dec = earlier closures & limited restaurants. Markets remain the best food & activity options.
 
 ---
 
-## 🧲 **14. Crossplane-Specific Commands**
+## 🚆 **Inter-City Travel Summary**
 
-Show provider status:
+| Route | Duration | Notes |
+|-------|----------|-------|
+| Budapest → Bratislava | 2.5–3 hrs | Frequent trains |
+| Bratislava → Vienna | ~1 hr | Perfect for a day trip |
+| Bratislava → Prague | 3.5–4 hrs | Book morning departure |
+| Prague → Wrocław | 4–5 hrs | Direct / 1-change options |
 
-```
-kubectl get providers.pkg.crossplane.io
-```
-
-Show managed resources owned by Crossplane:
-
-```
-kubectl get managed
-```
-
-Describe bucket:
-
-```
-kubectl describe bucket <name>
-```
+**Recommended platforms:**  
+**ÖBB**, **RegioJet**, **Trainline**, **RailEurope**
 
 ---
 
-# 🏁 **Summary: Your Go-To ArgoCD Debug Commands**
+## 🧰 **Logistics & Prep Checklist**
 
-```
-argocd app get <app>
-argocd app resources <app>
-argocd app diff <app>
-argocd app sync <app> --force
-argocd app refresh <app> --hard
-argocd app wait <app> --sync --health
-argocd app history <app>
-```
+### Before Trip
+- Install **Lufthansa App** → add PNR  
+- Set reminder for **API submission** (opens 23 hr before departure)  
+- Book all trains (high Christmas demand)  
+- Confirm hotels in central districts  
+- Add weather cards for all cities
+
+### Packing Essentials
+- Winter coat, thermals, boots, scarf, gloves  
+- Universal adapter + power bank  
+- Lip balm & moisturizer (cold climate)  
+- EUR / CZK / PLN / HUF (small amounts)
 
 ---
+
+## 🗃️ **Files / Links This Repo May Include**
+- `/itinerary/` → detailed day-plans  
+- `/trains/` → recommended trains, timings, booking links  
+- `/packing/` → packing checklist  
+- `/budget/` → estimated spend tracker  
+- `/maps/` → key map screenshots or GPX routes  
+- `/photos/` → trip gallery (post-trip)
+
+---
+
+## ⭐ **Next Actions**
+- [ ] Add booking confirmations  
+- [ ] Add train schedules & preferences  
+- [ ] Add restaurant shortlist per city  
+- [ ] Add packing list file  
+- [ ] Add “Live Weather Widget” if using a GitHub Pages theme  
+
+---
+
+### **Created with ❤️ by Muthu & Shivani’s Travel Brain**
+
