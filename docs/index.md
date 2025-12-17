@@ -5,6 +5,7 @@
 <!-- inject-nav -->
 
 ## 📘 Navigation Menu
+![22C199A8-A1DD-4E23-B2A7-E163E51F18D5_1_105_c](https://github.com/user-attachments/assets/2164a404-1284-4ffc-8508-19c0146b1db1)
 
 ---
 A beautifully curated 10-day winter Eurotrip covering **Budapest → Bratislava (+Vienna) → Prague → Wrocław** from **21 Dec 2025 to 31 Dec 2025**.
