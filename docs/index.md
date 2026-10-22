@@ -17,10 +17,10 @@ This site tracks all trip details — flights, days, routes, markets, checklists
 ## 🧭  **Trip Overview**
 
 **Dates:** 21 Dec 2025 → 01 Jan 2026  
-**PNR:** `8XTHPC`  
+**PNR:** `8X****`  
 **Passengers:**  
-- **Muthukumar Sambandam** — Ticket 2202236467432-33  
-- **Shivani Kakhandki** — Ticket 2202236467434-35  
+- **MK** — Ticket ****  
+- **SK** — Ticket ****  
 
 **Route:**  
 **Budapest → Bratislava → Vienna (day-trip) → Bratislava → Prague → Wrocław → Bangalore**
